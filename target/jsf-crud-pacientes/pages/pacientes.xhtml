@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+    <title>Cadastro de Pacientes</title>
+</h:head>
+<h:body>
+    <p:menuitem value="Médicos" outcome="medicos" icon="pi pi-user-md"/>
+    <h:form>
+        <p:panel header="Cadastro de Pacientes">
+            <p:inputText value="#{pacienteBean.paciente.nome}" placeholder="Nome"/>
+            <p:inputText value="#{pacienteBean.paciente.cpf}" placeholder="CPF"/>
+            <p:inputText value="#{pacienteBean.paciente.email}" placeholder="Email"/>
+            <p:commandButton value="Salvar" action="#{pacienteBean.salvar}" update="@form"/>
+        </p:panel>
+
+        <p:dataTable value="#{pacienteBean.pacientes}" var="p">
+            <p:column headerText="Nome">#{p.nome}</p:column>
+            <p:column headerText="CPF">#{p.cpf}</p:column>
+            <p:column headerText="Email">#{p.email}</p:column>
+            <p:column>
+                <p:commandButton value="Excluir" action="#{pacienteBean.remover(p)}" update="@form"/>
+            </p:column>
+        </p:dataTable>
+    </h:form>
+</h:body>
+</html>

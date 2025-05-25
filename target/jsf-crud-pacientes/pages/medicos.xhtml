@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Cadastro de Médicos</title>
+</h:head>
+<h:body>
+    <h:form>
+        <p:panel header="Cadastro de Médicos">
+            <p:inputText value="#{medicoBean.medico.nome}" placeholder="Nome" required="true"/>
+
+            <p:inputText value="#{medicoBean.medico.cpf}" placeholder="CPF" required="true"
+                         maxlength="14" mask="999.999.999-99"/>
+
+            <p:selectOneMenu value="#{medicoBean.medico.especialidade}" required="true">
+                <f:selectItem itemLabel="Selecione a especialidade" noSelectionOption="true"/>
+                <f:selectItems value="#{medicoBean.especialidades}" var="esp"
+                               itemLabel="#{esp}" itemValue="#{esp}"/>
+            </p:selectOneMenu>
+
+            <p:commandButton value="Salvar" action="#{medicoBean.salvar}" update="@form"
+                             icon="pi pi-check" style="margin-top: 10px"/>
+        </p:panel>
+
+        <p:dataTable value="#{medicoBean.medicos}" var="med" style="margin-top: 20px">
+            <p:column headerText="Nome">#{med.nome}</p:column>
+            <p:column headerText="CPF">#{med.cpf}</p:column>
+            <p:column headerText="Especialidade">#{med.especialidade}</p:column>
+            <p:column>
+                <p:commandButton value="Excluir" action="#{medicoBean.remover(med)}"
+                                 update="@form" icon="pi pi-trash"/>
+            </p:column>
+        </p:dataTable>
+    </h:form>
+</h:body>
+</html>
