@@ -28,4 +28,8 @@ public class MedicoDAO {
         em.remove(medico);
         em.getTransaction().commit();
     }
+
+    public Medico buscarPorId(Long id) {
+        return em.find(Medico.class, id);
+    }
 }

@@ -17,22 +17,22 @@
         <p:panel header="Nova Consulta" styleClass="form-panel">
             <div class="form-field required-field">
                 <p:outputLabel for="paciente" value="Paciente:" />
-                <p:selectOneMenu id="paciente" value="#{consultaBean.consulta.paciente}"
+                <p:selectOneMenu id="paciente" value="#{consultaBean.pacienteId}"
                                  required="true" requiredMessage="Selecione um paciente">
-                    <f:selectItem itemLabel="Selecione..." noSelectionOption="true"/>
+                    <f:selectItem itemLabel="Selecione..." noSelectionOption="true" itemValue="#{null}"/>
                     <f:selectItems value="#{consultaBean.pacientes}" var="pac"
-                                   itemLabel="#{pac.nome} (CPF: #{pac.cpf})" itemValue="#{pac}"/>
+                                   itemLabel="#{pac.nome} (CPF: #{pac.cpf})" itemValue="#{pac.id}"/>
                 </p:selectOneMenu>
                 <p:message for="paciente" />
             </div>
 
             <div class="form-field required-field">
                 <p:outputLabel for="medico" value="Médico:" />
-                <p:selectOneMenu id="medico" value="#{consultaBean.consulta.medico}"
+                <p:selectOneMenu id="medico" value="#{consultaBean.medicoId}"
                                  required="true" requiredMessage="Selecione um médico">
-                    <f:selectItem itemLabel="Selecione..." noSelectionOption="true"/>
+                    <f:selectItem itemLabel="Selecione..." noSelectionOption="true" itemValue="#{null}"/>
                     <f:selectItems value="#{consultaBean.medicos}" var="med"
-                                   itemLabel="#{med.nome} (#{med.especialidade})" itemValue="#{med}"/>
+                                   itemLabel="#{med.nome} (#{med.especialidade})" itemValue="#{med.id}"/>
                 </p:selectOneMenu>
                 <p:message for="medico" />
             </div>
@@ -52,14 +52,14 @@
             </div>
 
             <p:commandButton value="Agendar" action="#{consultaBean.agendar}"
-                             update=":formConsulta" icon="pi pi-calendar-plus"
+                             update=":formConsulta :messages" icon="pi pi-calendar-plus"
                              styleClass="ui-button-primary"/>
         </p:panel>
 
         <p:dataTable value="#{consultaBean.consultas}" var="cons" styleClass="data-table"
                      emptyMessage="Nenhuma consulta agendada" paginator="true" rows="10"
                      paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink}
-                                     {CurrentPageReport} {NextPageLink} {LastPageLink}">
+                                    {CurrentPageReport} {NextPageLink} {LastPageLink}">
             <p:column headerText="Paciente" sortBy="#{cons.paciente.nome}">
                 #{cons.paciente.nome}
             </p:column>
@@ -85,7 +85,7 @@
             <p:column style="width:80px">
                 <p:commandButton icon="pi pi-trash" title="Excluir"
                                  action="#{consultaBean.excluir(cons)}"
-                                 update=":formConsulta"
+                                 update=":formConsulta :messages"
                                  styleClass="ui-button-danger"/>
             </p:column>
         </p:dataTable>

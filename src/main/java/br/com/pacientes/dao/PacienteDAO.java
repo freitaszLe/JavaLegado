@@ -28,4 +28,8 @@ public class PacienteDAO {
         em.remove(paciente);
         em.getTransaction().commit();
     }
+
+    public Paciente buscarPorId(Long id) {
+        return em.find(Paciente.class, id);
+    }
 }

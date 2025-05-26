@@ -21,13 +21,26 @@ public class ConsultaBean implements Serializable {
     private transient PacienteDAO pacienteDAO = new PacienteDAO();
     private List<Consulta> consultasCache;
 
+    // IDs para seleção
+    private Long pacienteId;
+    private Long medicoId;
+
     public void agendar() {
         try {
+            // Busca os objetos completos a partir dos IDs
+            consulta.setPaciente(pacienteDAO.buscarPorId(pacienteId));
+            consulta.setMedico(medicoDAO.buscarPorId(medicoId));
+
             consultaDAO.agendar(consulta);
+
+            // Limpa o formulário
             consulta = new Consulta();
+            pacienteId = null;
+            medicoId = null;
             consultasCache = null;
         } catch (Exception e) {
             e.printStackTrace();
+            // Adicione aqui tratamento de mensagens para o usuário
         }
     }
 
@@ -40,6 +53,7 @@ public class ConsultaBean implements Serializable {
         }
     }
 
+    // Getters para as listas
     public List<Consulta> getConsultas() {
         if (consultasCache == null) {
             try {
@@ -73,4 +87,8 @@ public class ConsultaBean implements Serializable {
     // Getters e Setters
     public Consulta getConsulta() { return consulta; }
     public void setConsulta(Consulta consulta) { this.consulta = consulta; }
+    public Long getPacienteId() { return pacienteId; }
+    public void setPacienteId(Long pacienteId) { this.pacienteId = pacienteId; }
+    public Long getMedicoId() { return medicoId; }
+    public void setMedicoId(Long medicoId) { this.medicoId = medicoId; }
 }
