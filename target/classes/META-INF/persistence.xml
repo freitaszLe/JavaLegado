@@ -7,6 +7,8 @@
     <persistence-unit name="default" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>br.com.pacientes.model.Paciente</class>
+        <class>br.com.pacientes.model.Medico</class>
+        <class>br.com.pacientes.model.Consulta</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:testdb"/>

@@ -1,7 +1,10 @@
 br\com\pacientes\dao\PacienteDAO.class
 br\com\pacientes\model\Paciente.class
 br\com\pacientes\bean\MedicoBean.class
+br\com\pacientes\dao\ConsultaDAO.class
+br\com\pacientes\model\Consulta.class
 br\com\pacientes\model\Medico$Especialidade.class
+br\com\pacientes\bean\ConsultaBean.class
 br\com\pacientes\bean\PacienteBean.class
 br\com\pacientes\model\Medico.class
 br\com\pacientes\dao\MedicoDAO.class
